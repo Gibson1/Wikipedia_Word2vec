@@ -1,0 +1,40 @@
+<application>
+  <component name="FindSettings">
+    <option name="customScope" value="Project and Libraries" />
+    <option name="defaultScopeName" value="Project and Libraries" />
+    <option name="SEARCH_SCOPE" value="Project and Libraries" />
+    <option name="FILE_MASK" value="*.py" />
+    <recentFileMasks>
+      <mask>*.html</mask>
+      <mask>*.jsp</mask>
+      <mask>*.xml</mask>
+      <mask>*.java</mask>
+      <mask>*.js</mask>
+      <mask>*.as</mask>
+      <mask>*.css</mask>
+      <mask>*.mxml</mask>
+      <mask>A.py</mask>
+      <mask>Ap.py</mask>
+      <mask>Api.py</mask>
+      <mask>S.py</mask>
+      <mask>Se.py</mask>
+      <mask>Sea.py</mask>
+      <mask>Sear.py</mask>
+      <mask>Searc.py</mask>
+      <mask>Search.py</mask>
+      <mask>SearchAPI.py</mask>
+      <mask>SearchAP.py</mask>
+      <mask>SearchA.py</mask>
+      <mask>SearchAp.py</mask>
+      <mask>SearchApi.py</mask>
+      <mask>*。。</mask>
+      <mask>*。</mask>
+      <mask>*.s</mask>
+      <mask>*.sh</mask>
+      <mask>*</mask>
+      <mask>*.</mask>
+      <mask>*.p</mask>
+      <mask>*.py</mask>
+    </recentFileMasks>
+  </component>
+</application>
