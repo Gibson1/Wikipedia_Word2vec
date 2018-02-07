@@ -44,10 +44,28 @@ class MySentences(object):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print "Please use python train_with_gensim.py data_path"
-        exit()
+    if len(sys.argv) != 3:
+        print "Please use python train_with_gensim.py data_path out_path"
+        exit(255)
     data_path = sys.argv[1]
+    out_path = sys.argv[2]
+
+    # check parameters
+    if not os.path.exists(data_path):
+        print "[data_path] does not exist. Please try again with valid data_path"
+        exit(254)
+
+    # prepare env
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+    sys.getfilesystemencoding = lambda: 'UTF-8'
+    reload(sys)
+
+    # define constants
+    rootdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    jobname = os.path.splitext(os.path.basename(__file__))[0]
+    out_file = os.path.abspath(out_path) + os.path.sep + os.path.basename(data_path) + '.model.word2vec'
+
     begin = time()
 
     sentences = MySentences(data_path)
@@ -56,9 +74,9 @@ if __name__ == '__main__':
                                    window=10,
                                    min_count=10,
                                    workers=multiprocessing.cpu_count())
-    model.save("data/model/word2vec_gensim")
-    model.wv.save_word2vec_format("data/model/word2vec_org",
-                                  "data/model/vocabulary",
+    model.save(out_file + "_gensim")
+    model.wv.save_word2vec_format(out_file + "_org",
+                                  out_file + "_vocabulary",
                                   binary=False)
 
     end = time()
