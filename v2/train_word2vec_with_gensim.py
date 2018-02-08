@@ -37,14 +37,18 @@ class MySentences(object):
                         continue
                     rline = cleanhtml(sline)
                     tokenized_line = ' '.join(tokenize(rline))
-                    is_alpha_word_line = [word for word in
-                                          tokenized_line.lower().split()
-                                          if word.isalpha()]
-                    yield is_alpha_word_line
+                    if lang == 'en':
+                        is_valid_word_line = [word for word in
+                                              tokenized_line.lower().split()
+                                              if word.isalpha()]
+                    else:
+                        is_valid_word_line = [word for word in
+                                              tokenized_line.lower().split()]
+                    yield is_valid_word_line
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         print "Please use python train_with_gensim.py data_path out_path"
         exit(255)
     data_path = sys.argv[1]
@@ -65,6 +69,9 @@ if __name__ == '__main__':
     rootdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     jobname = os.path.splitext(os.path.basename(__file__))[0]
     out_file = os.path.abspath(out_path) + os.path.sep + os.path.basename(data_path) + '.model.word2vec'
+    lang = 'en'
+    if len(sys.argv) > 3:
+        lang = sys.argv[3]
 
     begin = time()
 
@@ -74,6 +81,14 @@ if __name__ == '__main__':
                                    window=10,
                                    min_count=10,
                                    workers=multiprocessing.cpu_count())
+
+    if not os.path.exists(out_path):
+        try:
+            oldumask = os.umask(0)
+            os.makedirs(out_path, 0775)
+        finally:
+            os.umask(oldumask)
+
     model.save(out_file + "_gensim")
     model.wv.save_word2vec_format(out_file + "_org",
                                   out_file + "_vocabulary",
